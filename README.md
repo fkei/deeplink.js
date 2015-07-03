@@ -24,3 +24,14 @@ or
 bower install deeplink.js
 ```
 
+# Build
+
+```sh
+$ make build # output: sua.min.js
+```
+
+
+
+## LICENSE
+
+@see : [LICENSE](https://github.com/fkei/deeplink.js/blob/master/LICENSE)
