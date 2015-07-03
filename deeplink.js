@@ -12,7 +12,7 @@
    * @name deeplink
    * @namespace deeplink
    */
-  var deeplink = {VERSION: '0.1.1'};
+  var deeplink = {VERSION: '0.2.1'};
 
   /**
    * Global Settings

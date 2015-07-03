@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>Demo - deeplink.js</title>
+    <script src="./deeplink.js"></script>
+  </head>
+  <body>
+    <script>
+      // iOS
+      function launchiOS(mobile) {
+        if (mobile === "simple") {
+          deeplink.launchiOS({
+            storeLink: "https://itunes.apple.com/jp/app/twitter/id333903271?mt=8",
+            urlScheme: "twitter://timeline"
+          });
+        } else if (mobile === "user") {
+          deeplink.launchiOS({
+            storeLink: "https://itunes.apple.com/jp/app/twitter/id333903271?mt=8",
+            urlScheme: "twitter://user?screen_name=fkei"
+          });
+        }
+      };
+
+      // Android
+      function launchAndroid(mobile) {
+        if (mobile === "simple") {
+          deeplink.launchAndroid({
+            storeLink: "https://play.google.com/store/apps/details?id=com.twitter.android",
+            urlScheme: "twitter://timeline"
+          });
+        } else if (mobile === "user") {
+          deeplink.launchAndroid({
+            storeLink: "https://play.google.com/store/apps/details?id=com.twitter.android",
+            urlScheme: "twitter://user?screen_name=fkei"
+          });
+        }
+      };
+
+
+    </script>
+
+    <h2>iOS</h2>
+    <ul>
+      <li><button onClick="launchiOS('simple')">Simple</button></li>
+      <li><button onClick="launchiOS('user')">User - @fkei</button></li>
+    </ul>
+
+    <h2>Android</h2>
+    <ul>
+      <li><button onClick="launchAndroid('simple')">Simple</button></li>
+      <li><button onClick="launchAndroid('user')">User - @fkei</button></li>
+    </ul>
+
+
+  </body>
+</html>

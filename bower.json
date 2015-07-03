@@ -1,0 +1,34 @@
+{
+  "name": "deeplink.js",
+  "version": "0.2.1",
+  "main": [
+    "deeplink.js",
+    "deeplink.min.js"
+  ],
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/fkei/deeplink.js",
+  "authors": [
+    "fkei <kei.topaz@gmail.com>"
+  ],
+  "description": "Redirect mobile website users to your native iOS and Android (browser only)",
+  "keywords": [
+    "browser",
+    "deeplink",
+    "iOS",
+    "Android"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "LICENSE",
+    "Makefile",
+    "README.md",
+    "bower.json",
+    "build.sh",
+    "node_modules",
+    "package.json",
+    "setver",
+    "bower_components",
+    "demo.html"
+  ]
+}
