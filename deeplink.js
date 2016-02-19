@@ -12,7 +12,7 @@
    * @name deeplink
    * @namespace deeplink
    */
-  var deeplink = {VERSION: '0.2.2'};
+  var deeplink = {VERSION: '0.4.0'};
 
   /**
    * Global Settings
@@ -30,10 +30,14 @@
    * @example
    * options : {
    *   storeLink: "https://itunes.apple.com/jp/app/twitter/id333903271?mt=8",
-   *   urlScheme: "twitter://timeline"
+   *   urlScheme: "twitter://timeline",
+   *   iframe: false
    * }
    */
   deeplink.launchiOS = function (options) {
+    if (!!options.iframe) {
+      return this._launchiFrame(options)
+    }
 
     var now = Date.now();
 
@@ -63,7 +67,6 @@
   deeplink.launchAndroid = function (options) {
     if(navigator.userAgent.match(/Chrome/)) {
       location.replace(options.urlScheme);
-      var self = this;
       setTimeout(function() {
         location.replace(options.storeLink);
       }, deeplink.settings.wait);
@@ -73,7 +76,7 @@
 
     deeplink._launchiFrame(options);
 
-  }
+  };
 
   /**
    * launch use iframe
@@ -86,12 +89,14 @@
     iframe.style.width = "1px";
     iframe.style.height = "1px";
     iframe.onload = function() {
-      window.location = options.storeLink;
-    }
+      if (!!options.storeLink) {
+        window.location = options.storeLink;
+      }
+    };
 
     document.body.appendChild(iframe);
 
-  }
+  };
 
   // main
 

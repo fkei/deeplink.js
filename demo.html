@@ -15,6 +15,12 @@
             storeLink: "https://itunes.apple.com/jp/app/twitter/id333903271?mt=8",
             urlScheme: "twitter://timeline"
           });
+        } else if (mobile === "iframe") {
+          deeplink.launchiOS({
+            storeLink: "https://itunes.apple.com/jp/app/twitter/id333903271?mt=8",
+            urlScheme: "twitter://timeline",
+            iframe: true,
+          });
         } else if (mobile === "user") {
           deeplink.launchiOS({
             storeLink: "https://itunes.apple.com/jp/app/twitter/id333903271?mt=8",
@@ -44,6 +50,7 @@
     <h2>iOS</h2>
     <ul>
       <li><button onClick="launchiOS('simple')">Simple</button></li>
+      <li><button onClick="launchiOS('iframe')">iframe</button></li>
       <li><button onClick="launchiOS('user')">User - @fkei</button></li>
     </ul>
 

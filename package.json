@@ -1,6 +1,6 @@
 {
     "name": "deeplink.js",
-    "version": "0.2.2",
+    "version": "0.4.0",
     "description": "Redirect mobile website users to your native iOS and Android (browser only)",
     "license": "MIT",
     "keywords": [
