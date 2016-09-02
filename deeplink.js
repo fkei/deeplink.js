@@ -41,15 +41,9 @@
 
     var wait = options.wait || deeplink.settings.wait;
 
-    var now = Date.now();
-
     setTimeout(function () {
-      if (Date.now() - now > wait) {
-        return;
-      }
-
       window.location = options.storeLink;
-    }, 100);
+    }, wait);
 
     window.location = options.urlScheme;
   };
