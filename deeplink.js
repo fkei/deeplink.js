@@ -22,6 +22,18 @@
   };
 
   /**
+  * Simple function to open fallback url
+  */
+  var openFallback = function(ts, delay, storeLink) {
+     return function() {
+         var wait = delay + 500;
+         if (typeof link === "string" && (Date.now() - ts) < wait) {
+             window.location.href = link;
+         }
+     }
+ };
+
+  /**
    * launch iOS
    *
    * @memberof deeplink
@@ -40,11 +52,7 @@
     }
 
     var wait = options.wait || deeplink.settings.wait;
-
-    setTimeout(function () {
-      window.location = options.storeLink;
-    }, wait);
-
+    setTimeout(openFallback(Date.now(), wait, options.storeLink), wait);
     window.location = options.urlScheme;
   };
 
@@ -62,17 +70,13 @@
    */
   deeplink.launchAndroid = function (options) {
     var wait = options.wait || deeplink.settings.wait;
-    if(navigator.userAgent.match(/Chrome/)) {
-      location.replace(options.urlScheme);
-      setTimeout(function() {
-        location.replace(options.storeLink);
-      }, wait);
-
+    if (navigator.userAgent.match(/Chrome/)) {
+      setTimeout(openFallback(Date.now(), wait, options.storeLink), wait);
+      window.location = options.urlScheme;
       return;
+    } else {
+        deeplink._launchiFrame(options);
     }
-
-    deeplink._launchiFrame(options);
-
   };
 
   /**
