@@ -12,7 +12,7 @@
    * @name deeplink
    * @namespace deeplink
    */
-  var deeplink = {VERSION: '0.4.0'};
+  var deeplink = {VERSION: '0.4.1'};
 
   /**
    * Global Settings
@@ -39,10 +39,12 @@
       return this._launchiFrame(options)
     }
 
+    var wait = options.wait || deeplink.settings.wait;
+
     var now = Date.now();
 
     setTimeout(function () {
-      if (Date.now() - now > deeplink.settings.wait) {
+      if (Date.now() - now > wait) {
         return;
       }
 
@@ -65,11 +67,12 @@
    * }
    */
   deeplink.launchAndroid = function (options) {
+    var wait = options.wait || deeplink.settings.wait;
     if(navigator.userAgent.match(/Chrome/)) {
       location.replace(options.urlScheme);
       setTimeout(function() {
         location.replace(options.storeLink);
-      }, deeplink.settings.wait);
+      }, wait);
 
       return;
     }
