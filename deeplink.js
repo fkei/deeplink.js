@@ -27,8 +27,8 @@
   var openFallback = function(ts, delay, storeLink) {
      return function() {
          var wait = delay + 500;
-         if (typeof link === "string" && (Date.now() - ts) < wait) {
-             window.location.href = link;
+         if (typeof storeLink === "string" && (Date.now() - ts) < wait) {
+             window.location = storeLink;
          }
      }
  };
