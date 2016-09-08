@@ -12,13 +12,25 @@
    * @name deeplink
    * @namespace deeplink
    */
-  var deeplink = {VERSION: '0.4.0'};
+  var deeplink = {VERSION: '0.4.1'};
 
   /**
    * Global Settings
    */
   deeplink.settings = {
     wait: 500, // Latency of the URL Scheme.
+  };
+
+  /**
+   * Simple function to open fallback url
+   */
+  var openFallback = function(ts, delay, storeLink) {
+    return function() {
+      var wait = delay + 500;
+      if (typeof storeLink === "string" && (Date.now() - ts) < wait) {
+        window.location.href = storeLink;
+      }
+    }
   };
 
   /**
@@ -39,16 +51,8 @@
       return this._launchiFrame(options)
     }
 
-    var now = Date.now();
-
-    setTimeout(function () {
-      if (Date.now() - now > deeplink.settings.wait) {
-        return;
-      }
-
-      window.location = options.storeLink;
-    }, 100);
-
+    var wait = options.wait || deeplink.settings.wait;
+    setTimeout(openFallback(Date.now(), wait, options.storeLink), wait);
     window.location = options.urlScheme;
   };
 
@@ -65,17 +69,17 @@
    * }
    */
   deeplink.launchAndroid = function (options) {
-    if(navigator.userAgent.match(/Chrome/)) {
-      location.replace(options.urlScheme);
-      setTimeout(function() {
-        location.replace(options.storeLink);
-      }, deeplink.settings.wait);
-
+    var wait = options.wait || deeplink.settings.wait;
+    if (navigator.userAgent.match(/Chrome/)) {
+      setTimeout(openFallback(Date.now(), wait, options.chromeUrlScheme), wait);
+      window.location = options.urlScheme;
       return;
+    } else if(navigator.userAgent.match(/Firefox/)) {
+      setTimeout(openFallback(Date.now(), wait, options.storeLink), wait);
+      window.location = options.urlScheme;
+    } else {
+      deeplink._launchiFrame(options);
     }
-
-    deeplink._launchiFrame(options);
-
   };
 
   /**
